@@ -2,8 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>NBA Wiki App - Información Detallada</title>
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#2a5298" />
 <style>
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -310,5 +313,16 @@
   renderPlayers();
 </script>
 
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('Service Worker registrado con éxito:', reg.scope))
+        .catch(err => console.log('Error al registrar Service Worker:', err));
+    });
+  }
+</script>
+
 </body>
 </html>
+
