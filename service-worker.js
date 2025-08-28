@@ -3,7 +3,7 @@ const urlsToCache = [
   './',
   './index.html',
   './manifest.json',
-  './b49365bd-b4ff-44da-b454-c6a1550840d5.png',
+  './https://cdn-icons-png.flaticon.com/512/4354/4354908.png',
   // Aquí puedes añadir archivos CSS/JS si los tienes separados
 ];
 
