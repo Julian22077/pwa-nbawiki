@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NBA Wiki App - Información Detallada</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    margin: 0;
+    padding: 30px;
+    color: #fff;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+
+  .players-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .player-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    padding: 20px 30px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .player-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 26px rgba(0,0,0,0.45);
+  }
+
+  .player-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffc107;
+    margin-bottom: 15px;
+  }
+
+  .player-info p {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+
+  .player-info strong {
+    color: #ffd54f;
+  }
+
+  @media (max-width: 600px) {
+    .player-card {
+      padding: 15px 20px;
+    }
+    .player-name {
+      font-size: 22px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>NBA Wiki - Información Detallada de Jugadores</h1>
+
+<div class="players-list" id="playersList"></div>
+
+<script>
+  const players = [
+    {
+      name: "LeBron James",
+      dob: "30 de diciembre de 1984",
+      height: "2.06 m",
+      position: "Alero / Base",
+      team: "Los Angeles Lakers",
+      mvps: 4,
+      allStar: 20,
+      rings: 4,
+      ppg: 27.2,
+      apg: 7.4,
+      rpg: 7.4
+    },
+    {
+      name: "Stephen Curry",
+      dob: "14 de marzo de 1988",
+      height: "1.88 m",
+      position: "Base",
+      team: "Golden State Warriors",
+      mvps: 2,
+      allStar: 9,
+      rings: 4,
+      ppg: 24.3,
+      apg: 6.5,
+      rpg: 4.6
+    },
+    {
+      name: "Michael Jordan",
+      dob: "17 de febrero de 1963",
+      height: "1.98 m",
+      position: "Escolta",
+      team: "Chicago Bulls (retirado)",
+      mvps: 5,
+      allStar: 14,
+      rings: 6,
+      ppg: 30.1,
+      apg: 5.3,
+      rpg: 6.2
+    },
+    {
+      name: "Kobe Bryant",
+      dob: "23 de agosto de 1978",
+      height: "1.98 m",
+      position: "Escolta / Alero",
+      team: "Los Angeles Lakers (retirado)",
+      mvps: 1,
+      allStar: 18,
+      rings: 5,
+      ppg: 25.0,
+      apg: 4.7,
+      rpg: 5.2
+    },
+    {
+      name: "Shaquille O'Neal",
+      dob: "6 de marzo de 1972",
+      height: "2.16 m",
+      position: "Pívot",
+      team: "Retirado",
+      mvps: 1,
+      allStar: 15,
+      rings: 4,
+      ppg: 23.7,
+      apg: 2.5,
+      rpg: 10.9
+    },
+{
+  name: "Kevin Durant",
+  dob: "29 de septiembre de 1988",
+  height: "2.08 m",
+  position: "Alero",
+  team: "Phoenix Suns",
+  mvps: 1,
+  allStar: 13,
+  rings: 2,
+  ppg: 27.0,
+  apg: 4.3,
+  rpg: 7.1
+},
+{
+  name: "Giannis Antetokounmpo",
+  dob: "6 de diciembre de 1994",
+  height: "2.11 m",
+  position: "Ala-pívot",
+  team: "Milwaukee Bucks",
+  mvps: 2,
+  allStar: 7,
+  rings: 1,
+  ppg: 21.8,
+  apg: 4.6,
+  rpg: 9.3
+},
+{
+  name: "James Harden",
+  dob: "26 de agosto de 1989",
+  height: "1.96 m",
+  position: "Escolta / Base",
+  team: "Philadelphia 76ers",
+  mvps: 1,
+  allStar: 10,
+  rings: 0,
+  ppg: 25.1,
+  apg: 6.8,
+  rpg: 5.3
+},
+{
+  name: "Luka Dončić",
+  dob: "28 de febrero de 1999",
+  height: "2.01 m",
+  position: "Base",
+  team: "Dallas Mavericks",
+  mvps: 0,
+  allStar: 4,
+  rings: 0,
+  ppg: 25.7,
+  apg: 7.7,
+  rpg: 8.0
+},
+{
+  name: "Kawhi Leonard",
+  dob: "29 de junio de 1991",
+  height: "2.01 m",
+  position: "Alero",
+  team: "Los Angeles Clippers",
+  mvps: 0,
+  allStar: 5,
+  rings: 2,
+  ppg: 19.2,
+  apg: 2.9,
+  rpg: 6.4
+},
+{
+  name: "Russell Westbrook",
+  dob: "12 de noviembre de 1988",
+  height: "1.91 m",
+  position: "Base",
+  team: "Los Angeles Lakers",
+  mvps: 1,
+  allStar: 9,
+  rings: 0,
+  ppg: 23.2,
+  apg: 8.4,
+  rpg: 7.1
+},
+{
+  name: "Anthony Davis",
+  dob: "11 de marzo de 1993",
+  height: "2.08 m",
+  position: "Pívot / Ala-pívot",
+  team: "Los Angeles Lakers",
+  mvps: 0,
+  allStar: 8,
+  rings: 1,
+  ppg: 23.0,
+  apg: 2.4,
+  rpg: 10.4
+},
+{
+  name: "Dirk Nowitzki",
+  dob: "19 de junio de 1978",
+  height: "2.13 m",
+  position: "Ala-pívot",
+  team: "Retirado",
+  mvps: 1,
+  allStar: 14,
+  rings: 1,
+  ppg: 20.7,
+  apg: 2.4,
+  rpg: 7.5
+},
+{
+  name: "Tim Duncan",
+  dob: "25 de abril de 1976",
+  height: "2.11 m",
+  position: "Pívot / Ala-pívot",
+  team: "Retirado",
+  mvps: 2,
+  allStar: 15,
+  rings: 5,
+  ppg: 19.0,
+  apg: 3.0,
+  rpg: 10.8
+},
+{
+  name: "Charles Barkley",
+  dob: "20 de febrero de 1963",
+  height: "1.98 m",
+  position: "Ala-pívot",
+  team: "Retirado",
+  mvps: 0,
+  allStar: 11,
+  rings: 0,
+  ppg: 22.1,
+  apg: 3.9,
+  rpg: 11.7
+}
+
+  ];
+
+  const playersList = document.getElementById('playersList');
+
+  function createPlayerCard(player) {
+    const card = document.createElement('div');
+    card.className = 'player-card';
+
+    card.innerHTML = `
+      <div class="player-name">${player.name}</div>
+      <div class="player-info">
+        <p><strong>Fecha de nacimiento:</strong> ${player.dob}</p>
+        <p><strong>Altura:</strong> ${player.height}</p>
+        <p><strong>Posición:</strong> ${player.position}</p>
+        <p><strong>Equipo:</strong> ${player.team}</p>
+        <p><strong>MVPs:</strong> ${player.mvps}</p>
+        <p><strong>NBA All-Star:</strong> ${player.allStar}</p>
+        <p><strong>Anillos ganados:</strong> ${player.rings}</p>
+        <p><strong>Puntos por partido (PPG):</strong> ${player.ppg}</p>
+        <p><strong>Asistencias por partido (APG):</strong> ${player.apg}</p>
+        <p><strong>Rebotes por partido (RPG):</strong> ${player.rpg}</p>
+      </div>
+    `;
+
+    return card;
+  }
+
+  function renderPlayers() {
+    playersList.innerHTML = ''; // limpiar
+    players.forEach(player => {
+      const card = createPlayerCard(player);
+      playersList.appendChild(card);
+    });
+  }
+
+  renderPlayers();
+</script>
+
+</body>
+</html>
